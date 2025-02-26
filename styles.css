@@ -1,30 +1,73 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container {
-    margin-top: 50px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: inline-block;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#container {
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px red, 0 0 15px yellow;
+}
+
+#message {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 0 0 10px white;
 }
 
 button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    background-color: #4CAF50;
+    background-color: #333;
     color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 5px;
+    margin-top: 20px;
+    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: red;
+    box-shadow: 0 0 20px red;
+}
+
+#ghost {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background-image: url('https://i.imgur.com/ZfA7LDI.png'); /* Add a ghost image URL */
+    background-size: cover;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 5;
+}
+
+#scary {
+    font-size: 2rem;
+    color: red;
+    margin-top: 50px;
+    text-shadow: 0 0 10px white;
+    display: none;
 }
