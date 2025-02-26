@@ -1,49 +1,66 @@
-let money = 0;
-let perClick = 1.32;
-let upgradeCost = 10;
-let cryptoPrice = 10;
-let stockPrice = 50;
+const startButton = document.getElementById("startBtn");
+const ghost = document.getElementById("ghost");
+const message = document.getElementById("message");
+const scaryMessage = document.createElement("div");
+scaryMessage.id = "scary";
+document.body.appendChild(scaryMessage);
 
-document.getElementById("click-button").addEventListener("click", function () {
-    money += perClick;
-    updateDisplay();
-});
+startButton.addEventListener("click", startGame);
 
-document.getElementById("upgrade-button").addEventListener("click", function () {
-    if (money >= upgradeCost) {
-        money -= upgradeCost;
-        perClick *= 1.1; 
-        upgradeCost *= 2;
-        updateDisplay();
-    }
-});
+function startGame() {
+    message.textContent = "Oh, you’re in for a treat...";
+    startButton.style.display = "none";
+    
+    setTimeout(() => {
+        document.body.style.backgroundColor = "#222";
+        document.body.style.color = "#ddd";
+        showCreepyMessage("Something is watching you...");
+    }, 3000);
 
-document.getElementById("buy-crypto").addEventListener("click", function () {
-    if (money >= cryptoPrice) {
-        money -= cryptoPrice;
-        cryptoPrice *= (Math.random() * 0.2 + 0.9);
-        updateDisplay();
-    }
-});
+    setTimeout(() => {
+        ghost.style.opacity = 1;
+        ghost.style.transform = "translate(-50%, -50%)";
+    }, 5000);
 
-document.getElementById("buy-stock").addEventListener("click", function () {
-    if (money >= stockPrice) {
-        money -= stockPrice;
-        stockPrice *= (Math.random() * 0.2 + 0.9);
-        updateDisplay();
-    }
-});
-
-function updateDisplay() {
-    document.getElementById("money").textContent = money.toFixed(2);
-    document.getElementById("upgrade-button").textContent = `Upgrade (Cost: $${upgradeCost.toFixed(2)})`;
-    document.getElementById("click-button").textContent = `💳 Tap Card (+$${perClick.toFixed(2)})`;
-    document.getElementById("crypto-price").textContent = `$${cryptoPrice.toFixed(2)}`;
-    document.getElementById("stock-price").textContent = `$${stockPrice.toFixed(2)}`;
+    setTimeout(() => {
+        ghost.style.opacity = 0;
+        startScaryEvent();
+    }, 10000);
 }
 
-setInterval(() => {
-    cryptoPrice *= (Math.random() * 0.1 + 0.95);
-    stockPrice *= (Math.random() * 0.1 + 0.95);
-    updateDisplay();
-}, 5000);
+function showCreepyMessage(text) {
+    scaryMessage.style.display = "block";
+    scaryMessage.textContent = text;
+}
+
+function startScaryEvent() {
+    setTimeout(() => {
+        showCreepyMessage("You should not have clicked that...");
+    }, 2000);
+
+    setTimeout(() => {
+        const horrorEffect = document.createElement('div');
+        horrorEffect.style.position = 'fixed';
+        horrorEffect.style.top = '0';
+        horrorEffect.style.left = '0';
+        horrorEffect.style.width = '100%';
+        horrorEffect.style.height = '100%';
+        horrorEffect.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        horrorEffect.style.color = 'red';
+        horrorEffect.style.fontSize = '5rem';
+        horrorEffect.style.display = 'flex';
+        horrorEffect.style.justifyContent = 'center';
+        horrorEffect.style.alignItems = 'center';
+        horrorEffect.style.textShadow = '0 0 20px red';
+        horrorEffect.style.zIndex = '9999';
+        horrorEffect.textContent = 'YOU ARE NOT ALONE...';
+        document.body.appendChild(horrorEffect);
+
+        setTimeout(() => {
+            horrorEffect.style.opacity = 0;
+            setTimeout(() => {
+                horrorEffect.remove();
+            }, 1000);
+        }, 3000);
+    }, 15000);
+}
